@@ -7,15 +7,6 @@ Option Explicit
 
 Sub Main
 
-' -------------------------------------------------------------------------------------------------
-' Main: This function serves as a main program for testing purposes.
-'       You need to rename this function to "Main" for debugging the result template.
-'
-'		PLEASE NOTE that a result template file must not contain a main program for
-'       proper execution by the framework. Therefore please ensure to rename this function
-'       to e.g. "Main2" before the result template can be used by the framework.
-' -------------------------------------------------------------------------------------------------
-
 	' Activate the StoreScriptSetting / GetScriptSetting functionality. Clear the data in order to
 	' provide well defined environment for testing.
 
@@ -33,9 +24,11 @@ Sub Main
 		stmpfile = "Test1D_temp.txt"
 		ncount = 1
 
+        Open "testOutput.txt" For Output As #1
+
 		Select Case GetScriptSetting("TemplateType", "1D")
 			Case "0D"
-				MsgBox CStr(Evaluate0D())
+				Write #1,Evaluate0D()
 			Case "1D"
 				Set r1d = Evaluate1D
 				r1d.Save stmpfile
@@ -74,7 +67,7 @@ Sub Main
 				Wend
 		End Select
 
-
+        Close #1 
 		With Resulttree
 		    .UpdateTree
 		    .RefreshView
