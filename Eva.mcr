@@ -24,11 +24,12 @@ Sub Main
 		stmpfile = "Test1D_temp.txt"
 		ncount = 1
 
-        Open "testOutput.txt" For Output As #1
+        Open "testOutput.txt" For Output As #2
 
 		Select Case GetScriptSetting("TemplateType", "1D")
 			Case "0D"
-				Write #1,Evaluate0D()
+				Print #2,Evaluate0D()
+                Print #2,"so it is"
 			Case "1D"
 				Set r1d = Evaluate1D
 				r1d.Save stmpfile
@@ -67,7 +68,7 @@ Sub Main
 				Wend
 		End Select
 
-        Close #1 
+        Close #2
 		With Resulttree
 		    .UpdateTree
 		    .RefreshView
